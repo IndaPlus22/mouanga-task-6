@@ -1,3 +1,4 @@
+import Data.Char
 
 fib :: Integer -> Integer
 fib 0 = 0
@@ -23,34 +24,38 @@ fib 42 = 267914296
 fib n = fib (n-2) + fib (n-1)
 
 
-pL :: Char -> String
-pL 'a' = "a"
-pL 'b' = "bob"
-pL 'c' = "coc"
-pL 'd' = "dod"
-pL 'e' = "e"
-pL 'f' = "fof"
-pL 'g' = "gog"
-pL 'h' = "hoh"
-pL 'i' = "i"
-pL 'j' = "joj"
-pL 'k' = "kok"
-pL 'l' = "lol"
-pL 'm' = "mom"
-pL 'n' = "non"
-pL 'o' = "o"
-pL 'p' = "pop"
-pL 'q' = "qoq"
-pL 'r' = "ror"
-pL 's' = "sos"
-pL 't' = "tot"
-pL 'u' = "u"
-pL 'v' = "vov"
-pL 'w' = "wow"
-pL 'x' = "xox"
-pL 'y' = "y"
-pL 'z' = "zoz"
-
-
 rovarsprak :: String -> String
 rovarsprak "" = ""
+rovarsprak a = if elem (head a) "bcdfghjklmnpqrstvwxz" then head a:'o':head a:rovarsprak (tail a) else head a:rovarsprak (tail a)
+
+karpsravor :: String -> String
+karpsravor "" = ""
+karpsravor a = if elem (head a) "bcdfghjklmnpqrstvwxz" then
+													   if length a > 2 then
+																	   if head a == a !! 2 && a !! 1 == 'o' then
+																											head a : karpsravor (drop 3 a)
+																	   else head a : karpsravor (tail a) -- ok, this is the second instance of the now doubled letter
+													   else head a : karpsravor (tail a) -- same as above, but now we're also at the end of the list (this part is probably unnecessary)
+			   else head a : karpsravor (tail a) -- ok, this is a vowel
+
+-- if head a == a !! 2 && a !! 1 == 'o' then head a: drop 3 (karpsravor a) else head a:karpsravor (tail a) else head a:karpsravor (tail a)
+
+
+sentence :: String -> String
+sentence "" = ""
+sentence a = if isAlpha(head a) == False then ' ' : sentence (tail a) else head a : sentence (tail a)
+
+medellangd :: String -> Double
+medellangd a = (fromIntegral (sum (map length (words (sentence a))) ) :: Double) / fromIntegral (length (words (sentence a))) :: Double
+
+
+skyffla :: [a] -> [a]
+skyffla [] = []
+skyffla a = skyffla' [] 9
+
+skyffla' :: [a] -> Int -> [a]
+skyffla' [] 0 = []
+skyffla' a 0 = a
+skyffla' a b = (head a) : (tail a)
+
+-- Först ta huvudet, sedan droppa 2:an, sedan ta allt som inte droppats, lägg till 2:an i slutet, minska räknaren med 1
