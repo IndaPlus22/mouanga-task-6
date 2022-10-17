@@ -57,4 +57,4 @@ varannan a = a !! 0 : varannan ( (drop 2) a)
 
 skyffla :: [a] -> [a]
 skyffla [] = []
-skyffla a = (varannan a) ++ (varannan (tail (a) ) )
+skyffla a = (varannan a) ++ skyffla (varannan (tail a))
