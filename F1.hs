@@ -32,13 +32,7 @@ rovarsprak a = if elem (head a) "bcdfghjklmnpqrstvwxz" then head a:'o':head a:ro
 
 karpsravor :: String -> String
 karpsravor "" = ""
-karpsravor a = if elem (head a) "bcdfghjklmnpqrstvwxz" then
-													   if length a > 2 then
-																	   if head a == a !! 2 && a !! 1 == 'o' then
-																											head a : karpsravor (drop 3 a)
-																	   else head a : karpsravor (tail a) -- ok, this is the second instance of the now doubled letter
-													   else head a : karpsravor (tail a) -- same as above, but now we're also at the end of the list (this part is probably unnecessary)
-			   else head a : karpsravor (tail a) -- ok, this is a vowel
+karpsravor a = if elem (head a) "bcdfghjklmnpqrstvwxz" then head a : karpsravor (drop 3 a) else head a : karpsravor (tail a) -- ok, this is a vowel
 
 -- 3: medellangd
 mening :: String -> String
