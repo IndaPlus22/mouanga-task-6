@@ -32,7 +32,7 @@ rovarsprak a = if elem (head a) "bcdfghjklmnpqrstvwxz" then head a:'o':head a:ro
 
 karpsravor :: String -> String
 karpsravor "" = ""
-karpsravor a = if elem (head a) "bcdfghjklmnpqrstvwxz" then head a : karpsravor (drop 3 a) else head a : karpsravor (tail a) -- ok, this is a vowel
+karpsravor a = if elem (head a) "bcdfghjklmnpqrstvwxz" then head a : karpsravor (drop 3 a) else head a : karpsravor (tail a)
 
 -- 3: medellangd
 mening :: String -> String
